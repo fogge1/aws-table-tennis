@@ -30,8 +30,9 @@ router.post('/createMatch', (req, res) => {
   let player1_id = req.body.player1_id
   let player2_id = req.body.player2_id
   pool.query(`INSERT INTO public."match" (date, player_ids) VALUES('${new Date()}', '{${player1_id}, ${player2_id}}')`, (err, response) => {
-    if (err) res.send(err)
-    else res.send('Created match')
+    if (err) return res.send(err)
+    console.log('Created match')
+    res.send('Created match')
   })
 })
 
@@ -51,8 +52,9 @@ router.post('/finish/:id', (req, res) => {
     WHERE match.id = ${match.id};
     UPDATE player SET wins = wins + 1 
     WHERE player.id in (select winner_id from match where match.id = ${match.id})`, (err, response) => {
-    if (err) res.send(err)
-    else res.send('Match finished')
+    if (err) return res.send(err)
+    res.send('Match finished')
+    console.log('Match finished')
   })
 })
 

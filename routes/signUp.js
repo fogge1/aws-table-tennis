@@ -1,4 +1,5 @@
 const express = require('express')
+const bcrypt = require('bcrypt')
 const router = express()
 const dbConfig = require("../config/db.config.js")
 
@@ -12,16 +13,16 @@ const pool = new Pool({
 })
 
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   let player = {
     name: req.body.name,
     email: req.body.email,
-    password: req.body.password,
+    password: await bcrypt.hash(req.body.password, 10)
   }
 
   pool.query(`INSERT INTO public."player" (name, email, password) VALUES ('${player.name}', '${player.email}', '${player.password}')`, (err, response) => {
-    if (err) res.send(err)
-    else res.send('Player added')
+    if (err) return res.send(err)
+    res.send('Player added')
   })
 })
 

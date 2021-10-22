@@ -13,8 +13,8 @@ const pool = new Pool({
 
 router.get('/', (req, res) => {
   pool.query('SELECT * FROM "leaderboard_view"', (err, response) => {
-    if (err) res.send(err)
-    else res.send(response.rows)
+    if (err) return res.send(err)
+    res.send(response.rows)
   })
 })
 
