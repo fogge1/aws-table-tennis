@@ -3,8 +3,7 @@
     <h1>LeaderBoard</h1>
     <div id="leaderboard">
       <div class="row" v-for="player in this.leaderboard" :key="player.id">
-        <h1>{{player.name}}</h1>
-        <h2 class="wins">{{player.wins}}</h2>
+        {{player.name}} {{player.wins}}
 
       </div>
     </div>
@@ -34,8 +33,12 @@ export default {
 /* .wins {
   float: left;
 } */
+#leaderboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .row {
-  width: 100px;
-  height: 100px;
+  margin-bottom: 30px;
 }
 </style>
