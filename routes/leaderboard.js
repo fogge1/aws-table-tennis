@@ -12,18 +12,9 @@ const pool = new Pool({
 });
 
 router.get('/', (req, res) => {
-    pool.query('SELECT * FROM "Leaderboard"', (err, response) => {
-        if (err) {
-            res.send(err);
-            console.log(err + ' test')
-            return;
-        }
-        else {
-            res.status(200).json({
-                players: response.rows
-            })
-            console.log(response.rows)
-        }
+    pool.query('SELECT * FROM "leaderboard_view"', (err, response) => {
+        if (err)  res.send(err);
+        else res.send(response.rows)
     })
 });
 
