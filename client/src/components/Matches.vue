@@ -20,7 +20,7 @@
 export default {
   data () {
     return {
-      matches: []
+      matches: [],
     }
   },
   methods: {
@@ -28,6 +28,9 @@ export default {
       let result = await this.$axios.get('http://localhost:3000/matches')
       this.matches = result.data
       //loop
+      for (match of matches) {
+
+      }
     },
     getPlayer: async function (id) {
       let result = await this.$axios.get('http://localhost:3000/players/' + id)
